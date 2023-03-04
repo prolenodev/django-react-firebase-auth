@@ -1,6 +1,20 @@
-import { Button } from "@chakra-ui/react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./FirebaseUtils";
+import styled from "styled-components";
+
+const Button = styled.button`
+  background-color: transparent;
+  border: none;
+  width: 100%; // fill entire width of parent container
+  height: 100%; // fill entire height of parent container
+  margin-top: 40px;
+  &:hover {
+    color: #5b5b5b;
+  }
+  &:active {
+    color: #edf2f7;
+  }
+`;
 
 const SignUp = ({ email, password, callback }) => {
   const registerNewUser = async () => {
@@ -25,7 +39,9 @@ const SignUp = ({ email, password, callback }) => {
       window.alert(e.code);
     }
   };
-  return <Button onClick={registerNewUser}>Sign Up</Button>;
+  return (
+    <Button onClick={registerNewUser}>Don't have an account? Sign Up</Button>
+  );
 };
 
 export default SignUp;

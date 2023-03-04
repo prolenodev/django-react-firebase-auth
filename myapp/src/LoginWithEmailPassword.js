@@ -1,6 +1,14 @@
-import { Button } from "@chakra-ui/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./FirebaseUtils";
+import styled from "styled-components";
+
+const Button = styled.button`
+  background-color: transparent;
+  border: none;
+  width: 100%; // fill entire width of parent container
+  height: 100%; // fill entire height of parent container
+  color: white; // button text colour
+`;
 
 const SignInButton = ({ email, password, callback }) => {
   const signInUser = async () => {

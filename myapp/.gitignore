@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Firebase configuration file
+src/FirebaseUtils.js
+server/core/firebase_auth/secrets/firebaseconfig.json
