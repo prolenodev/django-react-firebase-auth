@@ -71,10 +71,9 @@ const firebaseConfig = {
   appId: "__appid__",
   measurementId: "optional",
 };
+```
 
 <img src="https://github.com/prolenodev/django-react-firebase-auth/blob/master/localhost-3000.PNG"/><br/>
-
-```
 
 ## Firebase
 
