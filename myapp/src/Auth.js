@@ -128,7 +128,7 @@ const AuthorizationForm = () => {
 
       <Button onClick={callPrivateApi}>Call Private endpoint</Button>
       <Button onClick={refreshToken}>Refresh Token</Button>
-      <div>Token: {token}</div>
+      <div style={{ width: '100%', height: '50px', overflow: 'auto', wordWrap: 'break-word' }}>Token: {token}</div>
     </Wrapper>
   );
 };
