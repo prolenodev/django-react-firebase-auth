@@ -4,50 +4,88 @@
 <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" style="height:50px">
 </div>
 
-# Django Rest Framework working with Firebase for authentication ft. React as frontend
+# Django Rest Framework and React with Firebase Authentication
+This project demonstrates how to use Firebase Authentication with Django Rest Framework (DRF) as a backend and React as a frontend for user authentication and management. This project is a fork of [teshank2137's project](https://github.com/teshank2137/django-react-firebase-auth), but instead of using _Chakra UI_ for styling, I use _styled-components_ for integration into my own projects.
 
-## OAuth2.0
-What is OAuth? <br/>
-OAuth is an authorization protocol that provides users to grant websites or applications access to their information on other websites <br/>
+## Django
 
-Oauth became so popular that people started using OAuth for authentication, which OAuth is not built for.
-That's where OpenID connect comes in.
-OpenID connect is on the top layer of oauth2.0 which provides authentication to users on the server side.
+<img src="https://github.com/prolenodev/django-react-firebase-auth/blob/master/localhost-8000.PNG"/><br/>
 
-<img src="https://raw.githubusercontent.com/teshank2137/django-react-firebase-auth/master/oauth.JPG"/><br/>
+Edit `server\core\firebase_auth\secrets\firebaseconfig.json`
 
-This is image was taken from a talk given by Nate Barbettini you can check it out [on Youtube](https://youtu.be/996OiexHze0)
-
----
-
-## Firebase Authentication
-Firebase provides both authentications as well as authorization for us.
-
-Firebase Admin SDK helps us integrate our own server with the Firebase system.
-
-On the Client side, Firebase helps you authorize users. We can get the TokenID from that user object received from firebase.
-TokenID is nothing but a JWT token which is then decoded to authenticate the user and can be verified with firebase.
-
-To achieve authentication in our Django backend we have to extend BaseAuthentication class and write a simple middleware that decodes JWT and authenticates our user. Using this we can protect private routes in our backend.
-
-FirebaseAuthentication class resides in
-```
-server/core/firebase_auth/authentication.py 
-```
-
-
-We can then add our FirebaseAuthentication class as a default authentication class
+Generate new private key
 
 ```
-REST_FRAMEWORK = {
-  'DEFAULT_AUTHENTICATION_CLASSES': (
-        'firebase_auth.authentication.FirebaseAuthentication',
-  ),
+Firebase Console > Project Overview > Project Settings > Service Accounts > Firebase Admin SDK > Generate New Private Key > Download JSON file
+```
+
+Link: https://console.firebase.google.com/project/{project-name}/settings/serviceaccounts/adminsdk
+
+Example:
+```
+{
+  "type": "service_account",
+  "project_id": "replace-with-your-own",
+  "private_key_id": "0ab00c00c0f000d000cec00f00dedc00dc00000c",
+  "private_key": "-----BEGIN PRIVATE KEY-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-nnnnn@nnnnnnnn.iam.gserviceaccount.com",
+  "client_id": "114000000000000000000",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-.iam.gserviceaccount.com"
 }
 ```
 
-After the successful sign-in and verification, we can register the verified user in our backend with username as UID and can extend user class accordingly.
+Django admin overview:
+```
+http://localhost:8000/admin
+http://localhost:8000/admin/auth/user/
+```
+API endpoints:
+```
+http://localhost:8000/api/register
+http://localhost:8000/api/verified
+```
+
+## React
+
+Edit `myapp\src\FirebaseUtils.js`
+
+Get the config from Firebase Console
+
+```
+Firebase Console > Project Overview > Project Settings > General > Web Apps > SDK Setup and Configuration > npm
+```
+
+Link: https://console.firebase.google.com/project/{project-name}/settings/general
+
+Example:
+```
+const firebaseConfig = {
+  apiKey: "AIabCdE0Fghij_0ab0AAbcdE0abcAb0AbCcddEE",
+  authDomain: "replace-with-your-own.firebaseapp.com",
+  projectId: "replace-with-your-own",
+  storageBucket: "__BUCKET__",
+  messagingSenderId: "___sender_id__",
+  appId: "__appid__",
+  measurementId: "optional",
+};
+
+<img src="https://github.com/prolenodev/django-react-firebase-auth/blob/master/localhost-3000.PNG"/><br/>
+
+```
+
+## Firebase
+
+You can find the list of users in your Firebase Authentication console:
+```
+Firebase Console > Authentication > Users
+```
+
+Link: https://console.firebase.google.com/project/{project-name}/authentication/users
+
+<img src="https://github.com/prolenodev/django-react-firebase-auth/blob/master/firebase-console-users.png"/><br/>
 
 
-This was a fun and great learning experience for me.
-If you want to contribute feel free to create a PR request or raise an issue
+---
